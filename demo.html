@@ -25,11 +25,15 @@
     {
       width: 354px;
     }
-    .examples
+    .examples, .history
     {
       border: 1px solid black;
       width: 354px;
       margin: auto;
+    }
+    .history
+    {
+      height: 10em;
     }
   </style>
 </head>
@@ -46,14 +50,24 @@
   Priscila = PRISILA<br />
   Pricilla = PRISILA<br />
   Pricila = PRISILA
+</div><br />
+<div class="history">
+  <div class="top">Phonetizer history:</div>
+  <span id="history"></span>
 </div>
 
 <script type="text/javascript" src="phonetizer.js"></script>
 <script type="text/javascript">
+  document.getElementById ( 'text').onkeyup = function ( e)
+  {
+    document.getElementById ( 'phonetized').value = phonetizer ( document.getElementById ( 'text').value);
+  }
   document.getElementById ( 'form').onsubmit = function ( e)
   {
     e && e.preventDefault ();
-    document.getElementById ( 'phonetized').value = phonetizer ( document.getElementById ( 'text').value);
+    var el = document.createElement ( 'div');
+    el.innerHTML = document.getElementById ( 'text').value + ' = ' + phonetizer ( document.getElementById ( 'text').value);
+    document.getElementById ( 'history').insertBefore ( el, document.getElementById ( 'history').firstChild);
   };
 </script>
 
